@@ -26,6 +26,12 @@
             Create Epub
           </button>
         </form>
+        <form method="get" action="/series/{{ chapter.series_id }}/chapter/{{ chapter.id }}/audiobook">
+          <button type="submit" class="secondary">
+            {{ macros.icon_new(size=24) }}
+            Download Audiobook
+          </button>
+        </form>
       </fieldset>
       <ul>
         <li>

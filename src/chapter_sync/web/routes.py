@@ -62,6 +62,11 @@ routes: list[Route] = [
         "endpoint": chapter.download,
     },
     {
+        "method": "GET",
+        "path": "/series/{series_id}/chapter/{chapter_id}/audiobook",
+        "endpoint": chapter.download_audiobook,
+    },
+    {
         "method": "POST",
         "path": "/series/{series_id}/chapter/{chapter_id}/ebook",
         "endpoint": chapter.send,

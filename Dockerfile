@@ -1,7 +1,7 @@
 FROM python:3.11 as base
 
 RUN apt update && \
-    apt install \
+    apt install -y \
     curl \
     libffi-dev \
     libxml2-dev \
@@ -12,7 +12,8 @@ RUN apt update && \
     liblcms-dev \
     libwebp-dev \
     tcl-dev \
-    tk-dev
+    tk-dev \
+    espeak-ng
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
 RUN python3 -m venv /opt/venv
