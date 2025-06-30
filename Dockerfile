@@ -33,9 +33,7 @@ COPY . .
 RUN --mount=type=cache,target=/root/.cache/pypoetry poetry install --only-root
 
 FROM python:3.11 as final
-RUN --mount=type=cache,target=/var/cache/apt \
-    --mount=type=cache,target=/var/lib/apt \
-    apt update && mkdir /data
+RUN apt update && mkdir /data
 
 ENV VIRTUAL_ENV=/opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
