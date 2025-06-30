@@ -15,7 +15,7 @@ from chapter_sync.schema import Chapter
 from chapter_sync.web.dependencies import console, database, email_client, templates
 
 from chapter_sync.formats.kokoro import KokoroFormat as kokoro
-
+import time
 
 def find_chapter(db: Session, series_id: int, chapter_id: int) -> Chapter | None:
     return (
@@ -93,13 +93,18 @@ def download_audiobook(
     
     k = kokoro('af_heart')
 
-    print(chapter.content)
+    start = time.perf_counter()
 
     k.export(
         chapter.content,
         location="/output",
         filename=chapter.filename(),
     )
+
+    s = (time.perf_counter() - start) * 1000 * 1000
+
+    print(s + "s total")
+
 
 def send(
     request: Request,
