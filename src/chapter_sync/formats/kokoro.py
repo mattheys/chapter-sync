@@ -64,7 +64,7 @@ class KokoroFormat(IFormat):
 
         for i, (gs, ps, _) in enumerate(generator):
             print(f"Generated chunk {i}...")
-            gen = self.pipeline.generate_from_tokens(tokens=ps, voice=self.voice, speed=1)
+            gen = list(self.pipeline.generate_from_tokens(tokens=ps, voice=self.voice, speed=1))
             audio_chunks.append(gen[0].audio)
 
         if not audio_chunks:
