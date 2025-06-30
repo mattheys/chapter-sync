@@ -5,7 +5,7 @@ import torch
 import numpy as np
 import html2text
 
-from iformat import IFormat
+from chapter_sync.formats.iformat import IFormat
 
 class KokoroFormat(IFormat):
     """
