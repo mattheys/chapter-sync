@@ -91,7 +91,9 @@ def download_audiobook(
     print("Assert Chapter")
     assert chapter
     
-    kokoro.export(
+    k = kokoro('af_heart')
+
+    k.export(
         chapter.content,
         location="/output",
         filename=chapter.filename(),
