@@ -2,9 +2,7 @@
 
 FROM python:3.11 as base
 
-RUN --mount=type=cache,target=/var/cache/apt \
-    --mount=type=cache,target=/var/lib/apt \
-    apt update && \
+RUN apt update && \
     apt install -y \
     curl \
     libffi-dev \
