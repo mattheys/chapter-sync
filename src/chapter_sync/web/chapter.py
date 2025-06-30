@@ -92,7 +92,7 @@ def download_audiobook(
     assert chapter
     
     kokoro.export(
-        chapter.text,
+        chapter.content,
         location="/output",
         filename=chapter.filename(),
     )
