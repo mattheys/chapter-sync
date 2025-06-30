@@ -1,5 +1,3 @@
-# syntax=docker/dockerfile:1
-
 FROM python:3.11 as base
 
 RUN apt update && \
@@ -16,6 +14,7 @@ RUN apt update && \
     tcl-dev \
     tk-dev \
     espeak-ng
+
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
 RUN python3 -m venv /opt/venv
@@ -26,10 +25,14 @@ ENV POETRY_CACHE_DIR=/tmp/poetry_cache
 WORKDIR /chapter-sync
 
 COPY pyproject.toml poetry.lock .
-RUN --mount=type=cache,target=/tmp/poetry_cache poetry install --only main --no-root
+RUN --mount=type=cache,target=/tmp/poetry_cache \
+    --mount=type=cache,target=/root/.cache/pip \
+    poetry install --only main --no-root
 
 COPY . .
-RUN --mount=type=cache,target=/tmp/poetry_cache poetry install --only-root
+RUN --mount=type=cache,target=/tmp/poetry_cache \
+    --mount=type=cache,target=/root/.cache/pip \
+    poetry install --only-root
 
 
 ####################################################################################
