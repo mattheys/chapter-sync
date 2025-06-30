@@ -62,7 +62,7 @@ class KokoroFormat(IFormat):
         generator = self.pipeline(stripped_text, voice=self.voice, speed=1, split_pattern=r'\n+')
     
         for i, (gs, ps, audio) in enumerate(generator):
-            print(f"Generated chunk {i}...")
+            #print(f"Generated chunk {i}...")
             audio_chunks.append(audio)
 
         if not audio_chunks:
