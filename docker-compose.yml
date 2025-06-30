@@ -11,6 +11,7 @@ services:
     volumes:
       - "./:/chapter-sync"
       - "./data:/data"
+      - "./output:/ouptut"
 
   web:
     image: dancardin/chapter-sync:latest
@@ -23,3 +24,4 @@ services:
     volumes:
       - "./:/chapter-sync"
       - "./data:/data"
+      - "./weboutput:/ouptut"
