@@ -21,15 +21,18 @@ RUN curl -sSL https://install.python-poetry.org | python3 -
 RUN python3 -m venv /opt/venv
 ENV VIRTUAL_ENV=/opt/venv
 ENV PATH="/opt/venv/bin:/root/.local/bin:$PATH"
+ENV POETRY_CACHE_DIR=/tmp/poetry_cache
 
 WORKDIR /chapter-sync
 
 COPY pyproject.toml poetry.lock .
-RUN --mount=type=cache,target=/root/.cache/pypoetry poetry install --only main --no-root
+RUN --mount=type=cache,target=/tmp/poetry_cache poetry install --only main --no-root
 
 COPY . .
-RUN --mount=type=cache,target=/root/.cache/pypoetry poetry install --only-root
+RUN --mount=type=cache,target=/tmp/poetry_cache poetry install --only-root
 
+
+####################################################################################
 FROM python:3.11 as final
 RUN apt update && mkdir /data
 
