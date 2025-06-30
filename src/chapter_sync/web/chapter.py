@@ -93,6 +93,8 @@ def download_audiobook(
     
     k = kokoro('af_heart')
 
+    print(chapter.content)
+
     k.export(
         chapter.content,
         location="/output",
