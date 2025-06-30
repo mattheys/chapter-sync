@@ -14,7 +14,7 @@ from chapter_sync.email import EmailClient
 from chapter_sync.schema import Chapter
 from chapter_sync.web.dependencies import console, database, email_client, templates
 
-from chapter_sync.formats.kokoro import Export as KokoroExport
+from chapter_sync.formats.kokoro import KokoroFormat as kokoro
 
 
 def find_chapter(db: Session, series_id: int, chapter_id: int) -> Chapter | None:
@@ -91,7 +91,7 @@ def download_audiobook(
     print("Assert Chapter")
     assert chapter
     
-    KokoroExport.export(
+    kokoro.export(
         chapter.text,
         location="/output",
         filename=chapter.filename(),
