@@ -22,10 +22,7 @@ class OpenAiAudioFormat(IFormat):
         self.model = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
         self.voice = os.getenv("OPENAI_VOICE", "en-US-Wavenet-D")
 
-        self.client = OpenAi(base_url = self.base_url, api_key = self.api_key)
-
-        if not voice or not isinstance(voice, str):
-            raise ValueError("The 'voice' parameter must be a non-empty string.")
+        self.client = OpenAI(base_url = self.base_url, api_key = self.api_key)
 
         # Use the first letter of the voice name as the language code
         
