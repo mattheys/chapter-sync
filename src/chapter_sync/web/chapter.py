@@ -1,6 +1,7 @@
 import io
 from typing import Annotated
 
+from chapter_sync.formats import openaitts
 from fastapi import Depends, Request
 from fastapi.responses import RedirectResponse, StreamingResponse
 from fastapi.templating import Jinja2Templates
@@ -15,6 +16,8 @@ from chapter_sync.schema import Chapter
 from chapter_sync.web.dependencies import console, database, email_client, templates
 
 from chapter_sync.formats.kokoro import KokoroFormat as kokoro
+from chapter_sync.formats.openaitts import OpenAiAudioFormat as oaaf
+
 import time
 
 def find_chapter(db: Session, series_id: int, chapter_id: int) -> Chapter | None:
@@ -91,11 +94,11 @@ def download_audiobook(
     print("Assert Chapter")
     assert chapter
     
-    k = kokoro('af_heart')
-
+    o = oaaf()
+    
     start = time.perf_counter()
 
-    k.export(
+    o.export(
         chapter.content,
         location="/output",
         filename=chapter.filename(),
